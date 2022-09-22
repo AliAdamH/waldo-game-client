@@ -1,13 +1,7 @@
 import './App.css';
-import ImageList from './ImageList';
-
+import Home from './components/home/Home';
 function App() {
-  return (
-    <>
-      <h1>Hello this is the App component</h1>
-      <ImageList />
-    </>
-  );
+  return <Home />;
 }
 
 export default App;

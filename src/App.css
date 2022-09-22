@@ -1,0 +1,68 @@
+.header {
+  height: 100vh;
+  background-image: url('./wall.jpg');
+  background-size:cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header__title {
+  font-size: clamp(2.25rem, 2vw + 2rem, 4rem);
+  color: white;
+  text-align: center;
+  line-height: 1.1;
+  width: 80%;
+  z-index: 2;
+}
+
+.header::after {
+    content: '';
+    inset: 0;
+    background-color: rgba(0 0 0 / 0.475);
+    position: absolute;
+    z-index: 1;
+}
+
+.header__characters {
+  z-index: 2;
+}
+
+.header__start-btn {
+  padding: 1rem 3rem;
+  background-color: var(--clr-waldo-red);
+  color: white;
+  border: 4px outset white;
+  border-radius: 0.375rem;
+  font-size: 1.25rem;
+  z-index: 2;
+  transition: opacity 0.30s ease-in-out;
+}
+
+
+.header__start-btn:hover, .header__start-btn:focus {
+  opacity: 0.75;
+}
+
+.header__text {
+  color: white;
+  text-shadow: 0 0 0.5rem rgba(0 0 0 / 0.475);
+  font-size: 1.25rem;
+  z-index: 2;
+  text-align: center;
+  font-weight: 500;
+  padding: 1rem;
+}
+
+.home__title__fancy {
+  background: -webkit-linear-gradient(122.3deg, rgb(232, 129, 166) 29.6%, rgb(237, 237, 183) 42.1%, rgb(244, 166, 215) 56.7%, rgb(154, 219, 232) 68.7%, rgb(238, 226, 159) 84.8%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
