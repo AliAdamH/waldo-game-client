@@ -1,6 +1,6 @@
 import React from 'react';
-import ImageList from '../ImageList/ImageList';
 import waldoChars from '../../waldo-logo.png';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home = (props) => {
@@ -17,10 +17,10 @@ const Home = (props) => {
           aria-hidden="true"
           className="header__characters"
         />
-        <button className="header__start-btn">🕵️ PLAY</button>
+        <Link to="/images" className="header__start-btn">
+          🕵️ PLAY
+        </Link>
       </header>
-      <h1>Hello this is the App component</h1>
-      <ImageList />
     </>
   );
 };
