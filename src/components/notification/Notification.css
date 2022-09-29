@@ -1,0 +1,31 @@
+.notification {
+    position: fixed;
+    left: 50%;
+    opacity: 0;
+    top: 0;
+    width: 300px;
+    height: 72px;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    background-color: hsl(106, 95%, 55%);
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
+    color: black;
+    animation-name: appear-then-go;
+    animation-duration: 3.2s;
+    animation-timing-function: linear;
+    pointer-events: none;
+
+}
+
+
+
+
+@keyframes appear-then-go {
+    0%, 100% {
+      transform: translateX(-50%) translateY(-100%);
+    }
+    10%, 80% {
+        opacity: 1;
+      transform: translateX(-50%) translateY(70%);
+    }
+  } 
