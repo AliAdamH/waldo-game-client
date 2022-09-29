@@ -1,0 +1,5 @@
+.landscape {
+    width: min(100%, 1400px);
+    margin: 0 auto;
+    position: relative;
+}

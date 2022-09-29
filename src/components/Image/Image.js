@@ -1,15 +1,17 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import CharacterList from '../CharacterList/CharacterList';
+import Space from '../../playgrounds/space.jpg';
 const Image = (props) => {
   const { id } = useParams();
 
-  // 1 - On mount we should fetch the image
-  // 2 - add a timer to show in the page.
-  // 3 - The image should be lisible here.
-
   return (
     <>
-      <h1>Hello from Image {id} </h1>
+      <h1> &larr; Hello from Image {id} </h1>
+      <CharacterList />
+      <div className="landscape">
+        <img src={Space} alt="Waldo landscape" id="playground" />
+      </div>
     </>
   );
 };
