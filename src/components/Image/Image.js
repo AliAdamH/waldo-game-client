@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterList from '../CharacterList/CharacterList';
-import Space from '../../playgrounds/space.jpg';
 import Notification from '../notification/Notification';
 
 const Image = (props) => {
@@ -13,6 +12,9 @@ const Image = (props) => {
 
   useEffect(() => {
     // on component mount I want you to fetch the image from the server.
+    fetch('http://localhost:3000/api/v1/images/' + id)
+      .then((response) => response.json())
+      .then((data) => setImageUrl(data.landscape_url));
   }, []);
 
   useEffect(() => {
@@ -65,7 +67,7 @@ const Image = (props) => {
       <div className="landscape">
         <img
           onClick={handleImageClick}
-          src={Space}
+          src={imageURL}
           alt="Waldo landscape"
           id="playground"
         />
