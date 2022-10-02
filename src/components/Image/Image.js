@@ -7,7 +7,7 @@ const Image = (props) => {
   const { id } = useParams();
   const [imageURL, setImageUrl] = useState('');
   const [charactersFound, setCharactersFound] = useState([]);
-  const [currentCharacter, setCurrentCharacter] = useState(null);
+  const [currentCharacter, setCurrentCharacter] = useState('');
   const [openNotification, setOpenNotification] = useState(false);
 
   useEffect(() => {
@@ -23,36 +23,42 @@ const Image = (props) => {
     }
   }, [charactersFound]);
 
-  const isValidCharacter = (clientPosition) => {
-    // send this data to the backend but also throttle/debounce the calling function.
-    // Example of a true response
-    let response = {
-      Waldo: true,
-    };
+  const requestCoordValidity = (position) => {
+    console.log(position);
+    let { width, height } = position;
+    fetch(
+      'http://localhost:3000/api/v1/verify?' +
+        new URLSearchParams({
+          id,
+          width,
+          height,
+        })
+    )
+      .then((response) => response.json())
+      .then((data) => setCurrentCharacter(data.found))
+      .catch((error) => console.error(error));
+  };
 
-    // Add the character if it's not already there.
-    for (let key in response) {
-      if (response[key]) {
-        if (!charactersFound.includes(key)) {
-          setCharactersFound((prev) => {
-            return [...prev, key];
-          });
-
-          setCurrentCharacter(key);
-        }
+  useEffect(() => {
+    if (currentCharacter !== '') {
+      if (!charactersFound.includes(currentCharacter)) {
+        setOpenNotification(true);
+        setCharactersFound((prev) => {
+          return [...prev, currentCharacter];
+        });
       }
     }
-  };
+  }, [currentCharacter]);
 
   const handleImageClick = (e) => {
     //debounce this one.
     const { width, height } = e.target.getBoundingClientRect();
     let positionObject = {
-      height: e.offsetY / height,
-      width: e.offsetX / width,
+      height: (e.nativeEvent.offsetY / height).toFixed(3),
+      width: (e.nativeEvent.offsetX / width).toFixed(3),
     };
 
-    isValidCharacter(positionObject);
+    requestCoordValidity(positionObject);
   };
 
   const testNotification = () => {
@@ -66,7 +72,7 @@ const Image = (props) => {
       <CharacterList />
       <div className="landscape">
         <img
-          onClick={handleImageClick}
+          onClick={(e) => handleImageClick(e)}
           src={imageURL}
           alt="Waldo landscape"
           id="playground"
