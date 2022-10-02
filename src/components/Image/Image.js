@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterList from '../CharacterList/CharacterList';
 import Notification from '../notification/Notification';
+import VictoryModal from '../VictoryModal/VictoryModal';
 
 const Image = (props) => {
   const { id } = useParams();
@@ -9,6 +10,7 @@ const Image = (props) => {
   const [charactersFound, setCharactersFound] = useState([]);
   const [currentCharacter, setCurrentCharacter] = useState('');
   const [openNotification, setOpenNotification] = useState(false);
+  const [openVictoryModal, setOpenVictoryModal] = useState(false);
 
   useEffect(() => {
     // on component mount I want you to fetch the image from the server.
@@ -19,8 +21,9 @@ const Image = (props) => {
 
   useEffect(() => {
     if (charactersFound.length === 4) {
-      // code to finish the game
+      setOpenVictoryModal(true);
     }
+    console.log(charactersFound);
   }, [charactersFound]);
 
   const requestCoordValidity = (position) => {
@@ -82,6 +85,15 @@ const Image = (props) => {
         <Notification
           text={currentCharacter}
           dismount={() => setOpenNotification(false)}
+        />
+      )}
+
+      {openVictoryModal && (
+        <VictoryModal
+          imageId={id}
+          // Just to test the value, remove later.
+          timeTaken={333}
+          dismount={() => setOpenVictoryModal(false)}
         />
       )}
     </>
