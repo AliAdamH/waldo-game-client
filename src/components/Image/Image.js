@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterList from '../CharacterList/CharacterList';
 import Notification from '../notification/Notification';
 import VictoryModal from '../VictoryModal/VictoryModal';
+import debounce from 'lodash.debounce';
 
 const Image = (props) => {
   const { id } = useParams();
@@ -64,18 +65,18 @@ const Image = (props) => {
     requestCoordValidity(positionObject);
   };
 
-  const testNotification = () => {
-    setCurrentCharacter('hello');
-    setOpenNotification(true);
-  };
+  const debounceImageClickHandling = useMemo(
+    () => debounce(handleImageClick, 250),
+    []
+  );
+
   return (
     <>
-      <button onClick={testNotification}>Click me</button>
       <h1> &larr; Hello from Image {id} </h1>
       <CharacterList />
       <div className="landscape">
         <img
-          onClick={(e) => handleImageClick(e)}
+          onClick={debounceImageClickHandling}
           src={imageURL}
           alt="Waldo landscape"
           id="playground"
