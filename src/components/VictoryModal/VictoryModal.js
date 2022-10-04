@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './VictoryModal.css';
 
-const VictoryModal = ({ imageId, timeTaken, dismount }) => {
+const VictoryModal = ({ imageId, timeTaken }) => {
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -33,7 +33,7 @@ const VictoryModal = ({ imageId, timeTaken, dismount }) => {
   return (
     <div className="victory-modal">
       <div className="victory-modal__content">
-        <h1> You won !</h1>
+        <h1> You won ! with a score of {timeTaken} seconds</h1>
         <form onSubmit={handleSubmit}>
           <label htmlFor="player">Enter your name: </label>
           <input type={'text'} id="player" name="player" />

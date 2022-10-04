@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CharacterList from '../CharacterList/CharacterList';
+import Timer from '../Timer/Timer';
 import Notification from '../notification/Notification';
 import VictoryModal from '../VictoryModal/VictoryModal';
 import debounce from 'lodash.debounce';
@@ -8,6 +9,8 @@ import debounce from 'lodash.debounce';
 const Image = (props) => {
   const { id } = useParams();
   const [imageURL, setImageUrl] = useState('');
+  const score = useRef(0);
+  const [openTimer, setOpenTimer] = useState(true);
   const [charactersFound, setCharactersFound] = useState([]);
   const [currentCharacter, setCurrentCharacter] = useState('');
   const [openNotification, setOpenNotification] = useState(false);
@@ -22,6 +25,7 @@ const Image = (props) => {
 
   useEffect(() => {
     if (charactersFound.length === 4) {
+      setOpenTimer(false);
       setOpenVictoryModal(true);
     }
     console.log(charactersFound);
@@ -93,10 +97,11 @@ const Image = (props) => {
         <VictoryModal
           imageId={id}
           // Just to test the value, remove later.
-          timeTaken={333}
-          dismount={() => setOpenVictoryModal(false)}
+          timeTaken={score.current}
         />
       )}
+
+      {openTimer && <Timer score={score} />}
     </>
   );
 };
