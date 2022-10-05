@@ -1,10 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import CharacterList from '../CharacterList/CharacterList';
 import Timer from '../Timer/Timer';
 import Notification from '../notification/Notification';
 import VictoryModal from '../VictoryModal/VictoryModal';
 import debounce from 'lodash.debounce';
+import './Image.css';
 
 const Image = (props) => {
   const { id } = useParams();
@@ -76,8 +77,14 @@ const Image = (props) => {
 
   return (
     <>
-      <h1> &larr; Hello from Image {id} </h1>
-      <CharacterList />
+      <div className="image-header">
+        <Link className="back-link" to="/images">
+          {' '}
+          &larr; Back to images
+        </Link>
+        <CharacterList />
+        {openTimer && <Timer score={score} />}
+      </div>
       <div className="landscape">
         <img
           onClick={debounceImageClickHandling}
@@ -100,8 +107,6 @@ const Image = (props) => {
           timeTaken={score.current}
         />
       )}
-
-      {openTimer && <Timer score={score} />}
     </>
   );
 };

@@ -1,4 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ReactComponent as Watch } from '../../Images/stopwatch.svg';
+import './Timer.css';
 
 const Timer = ({ score }) => {
   // Doubt the performance of this object creation
@@ -10,7 +12,7 @@ const Timer = ({ score }) => {
   useEffect(() => {
     score.current = count;
     date.setSeconds(count);
-    setStrTime(date.toISOString());
+    setStrTime(date.toISOString().slice(11, 19));
   }, [count]);
 
   useEffect(() => {
@@ -28,9 +30,10 @@ const Timer = ({ score }) => {
 
   return (
     <>
-      <p>
-        Hello from timer this is count number: {count} and {strTime}
-      </p>
+      <div className="timer">
+        <Watch style={{ width: '48px' }} />
+        <span style={{ fontSize: '32px' }}>{strTime}</span>
+      </div>
     </>
   );
 };
