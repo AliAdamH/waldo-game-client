@@ -12,9 +12,9 @@ const Image = (props) => {
   const [imageURL, setImageUrl] = useState('');
   const score = useRef(0);
   const [openTimer, setOpenTimer] = useState(true);
+  const [activeNotifications, setActiveNotifications] = useState([]);
   const [charactersFound, setCharactersFound] = useState([]);
   const [currentCharacter, setCurrentCharacter] = useState('');
-  const [openNotification, setOpenNotification] = useState(false);
   const [openVictoryModal, setOpenVictoryModal] = useState(false);
 
   useEffect(() => {
@@ -51,7 +51,15 @@ const Image = (props) => {
   useEffect(() => {
     if (currentCharacter !== '') {
       if (!charactersFound.includes(currentCharacter)) {
-        setOpenNotification(true);
+        setActiveNotifications((prev) => {
+          return [
+            ...prev,
+            <Notification
+              text={currentCharacter}
+              dismount={handleNotificationRemoval}
+            />,
+          ];
+        });
         setCharactersFound((prev) => {
           return [...prev, currentCharacter];
         });
@@ -75,6 +83,12 @@ const Image = (props) => {
     []
   );
 
+  const handleNotificationRemoval = () => {
+    setActiveNotifications((prev) => {
+      return prev.filter((_, index) => index !== 0);
+    });
+  };
+
   return (
     <>
       <div className="image-header">
@@ -93,12 +107,13 @@ const Image = (props) => {
           id="playground"
         />
       </div>
-      {openNotification && (
+      {/* {openNotification && (
         <Notification
           text={currentCharacter}
           dismount={() => setOpenNotification(false)}
         />
-      )}
+      )} */}
+      <>{activeNotifications}</>
 
       {openVictoryModal && (
         <VictoryModal
