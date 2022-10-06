@@ -1,5 +1,5 @@
 .landscape {
-    width: min(100%, 1400px);
+    width: min(100%, 1920px);
     margin: 0 auto;
     position: relative;
 }
@@ -8,6 +8,8 @@
     display: flex;
     gap: 1rem;
     justify-content: space-around;
+    padding: 1rem;
+    flex-wrap: wrap;
 }
 
 .back-link {

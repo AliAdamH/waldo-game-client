@@ -7,8 +7,8 @@
 
 .character {
     position: relative;
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     /* border: 2px solid var(--clr-waldo-red); */
     overflow: hidden;
@@ -31,4 +31,11 @@
     border-radius: 50%;
     background-color: hsla(106, 95%, 55%, 0.635);
     border: 2px solid hsla(106, 60%, 35%, 0.635);
+}
+
+@media (min-width: 50em) {
+    .character {
+        width: 80px;
+        height: 80px;
+    }
 }

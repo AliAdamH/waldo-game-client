@@ -74,7 +74,6 @@ const Image = (props) => {
       height: (e.nativeEvent.offsetY / height).toFixed(3),
       width: (e.nativeEvent.offsetX / width).toFixed(3),
     };
-
     requestCoordValidity(positionObject);
   };
 

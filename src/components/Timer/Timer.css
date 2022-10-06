@@ -3,3 +3,12 @@
     gap: 2rem;
     align-items: center;
 }
+
+.timer__watch {
+    width: clamp(1.5rem, 2vw + 2rem, 2.5rem);
+}
+
+.timer__text {
+    font-size: clamp(1.25rem, 2vw + 1rem, 2.5rem);
+}
+

@@ -31,8 +31,8 @@ const Timer = ({ score }) => {
   return (
     <>
       <div className="timer">
-        <Watch style={{ width: '48px' }} />
-        <span style={{ fontSize: '32px' }}>{strTime}</span>
+        <Watch className="timer__watch" />
+        <span className="timer__text">{strTime}</span>
       </div>
     </>
   );
