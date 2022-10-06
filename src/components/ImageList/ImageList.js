@@ -7,7 +7,10 @@ const ImageList = (props) => {
   useEffect(() => {
     fetch('http://localhost:3000/api/v1/images')
       .then((response) => response.json())
-      .then((data) => setImages(data))
+      .then((data) => {
+        console.log(data);
+        return setImages(data);
+      })
       .catch((error) => console.error(error));
   }, []);
 
@@ -28,9 +31,20 @@ const ImageList = (props) => {
                 <div className="list-item__info">
                   <p className="list-item__info__title">
                     {image.attributes.title} <br />{' '}
-                    <small>Current Record: 0.05s</small>
-                    <br />
-                    <small>Player: SomePlayerName</small>{' '}
+                    {image.attributes.best_score ? (
+                      <>
+                        <small>
+                          Current Record:{' '}
+                          {image.attributes.best_score.game_duration} seconds
+                        </small>
+                        <br />
+                        <small>
+                          Player: {image.attributes.best_score.player || '-'}
+                        </small>
+                      </>
+                    ) : (
+                      <small>No Registered Game</small>
+                    )}
                   </p>
                 </div>
               </div>
