@@ -7,17 +7,18 @@
     height: 72px;
     padding: 1rem;
     border-radius: 0.3rem;
-    background-color: hsl(106, 95%, 55%);
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.4);
-    color: black;
+    background-color: white;
+    color: hsl(120, 88%, 37%);
+    font-weight: 900;
+    font-size: 1.5rem;
     animation-name: appear-then-go;
     animation-duration: 3.2s;
     animation-timing-function: linear;
     pointer-events: none;
-
+    display: grid;
+    place-items: center;
 }
-
-
 
 
 @keyframes appear-then-go {

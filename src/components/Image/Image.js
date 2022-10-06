@@ -82,7 +82,7 @@ const Image = (props) => {
           {' '}
           &larr; Back to images
         </Link>
-        <CharacterList />
+        <CharacterList checkedCharacters={charactersFound} />
         {openTimer && <Timer score={score} />}
       </div>
       <div className="landscape">

@@ -16,7 +16,7 @@ const Notification = ({ text, dismount }) => {
 
   return createPortal(
     <>
-      <div className="notification">{text} found !</div>
+      <div className="notification"> &#10003; &nbsp; You found: {text} </div>
     </>,
     document.body
   );

@@ -13,7 +13,9 @@ const ImageList = (props) => {
 
   return (
     <>
-      <h2>This is the image list component</h2>
+      <h1 className="title">
+        Choose a <span className="fancy-waldo-text">Waldo</span> landscape{' '}
+      </h1>
       <div className="container">
         {images.map((image, index) => {
           return (

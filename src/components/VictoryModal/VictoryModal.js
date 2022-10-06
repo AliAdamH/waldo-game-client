@@ -35,9 +35,13 @@ const VictoryModal = ({ imageId, timeTaken }) => {
       <div className="victory-modal__content">
         <h1> You won ! with a score of {timeTaken} seconds</h1>
         <form onSubmit={handleSubmit}>
-          <label htmlFor="player">Enter your name: </label>
-          <input type={'text'} id="player" name="player" />
-          <button type={'submit'}>Send</button>
+          <div className="form-field">
+            <label htmlFor="player">Enter your name: </label>
+            <input type={'text'} id="player" name="player" />
+          </div>
+          <button className="submit-btn" type={'submit'}>
+            Send
+          </button>
         </form>
       </div>
     </div>
