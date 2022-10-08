@@ -71,8 +71,8 @@ const Image = (props) => {
     //debounce this one.
     const { width, height } = e.target.getBoundingClientRect();
     let positionObject = {
-      height: (e.nativeEvent.offsetY / height).toFixed(3),
-      width: (e.nativeEvent.offsetX / width).toFixed(3),
+      height: (e.nativeEvent.layerY / height).toFixed(3),
+      width: (e.nativeEvent.layerX / width).toFixed(3),
     };
     requestCoordValidity(positionObject);
   };
