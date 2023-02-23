@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# Project - Photo Tagging App (Where's Waldo)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+This project is part of the **Odin Project** curriculum.
+[Link to the full description](https://www.theodinproject.com/lessons/javascript-where-s-waldo-a-photo-tagging-app)
 
-In the project directory, you can run:
+<br>
 
-### `npm start`
+This app's works how a typical where's waldo game would. A player
+needs to choose a playground where four main characters are scattered (Waldo, Wizard, Wilma, Odlaw). The goal is to find each character in the fastest possible time.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## **Takeaway**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To enable the photo tagging ability I first had to manually record  the position of each character on each playground. The position was defined
+by recording four points (width and height) of the visible portion of the character, creating a box target as illustrated by the images below :
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<br>
 
-### `npm run eject`
+This means any clicks within that box are valid.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+It is important to note that measures were done using the following steps :
+1. Get the width and height from the bounding client rectangle in order to get the size of the image on the user's device (it can vary)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br>
 
-## Learn More
+2. Calculate the coordinates ratio relative to the image's dimensions and using offsetX/offsetY. however I noticed a weird bug : when using offsetX/offsetY in Firefox through React's nativeEvent (since synthetic events don't include offset properties), the value is always 0, therefore LayerX and LayerY (which hold the same values as offset in both Chrome and Firefox) were chosen as an alternative.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<br>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+ const { width, height } = e.target.getBoundingClientRect();
+    let positionObject = {
+      height: (e.nativeEvent.layerY / height).toFixed(3),
+      width: (e.nativeEvent.layerX / width).toFixed(3),
+    };
+    requestCoordValidity(positionObject);
+```
+<br>
 
-### Code Splitting
+3. Validation of the coordinates ratio is done server-side through an api
+as it was required by the assignement that we _should not_ send the location of each character with the image and performing the validation on the client.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
