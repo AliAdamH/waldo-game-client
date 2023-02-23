@@ -4,10 +4,11 @@ import CharacterList from '../CharacterList/CharacterList';
 import Timer from '../Timer/Timer';
 import Notification from '../notification/Notification';
 import VictoryModal from '../VictoryModal/VictoryModal';
+import { API_BASE_URL } from '../../constants';
 import debounce from 'lodash.debounce';
 import './Image.css';
 
-const Image = (props) => {
+const Image = () => {
   const { id } = useParams();
   const [imageURL, setImageUrl] = useState('');
   const score = useRef(0);
@@ -18,8 +19,7 @@ const Image = (props) => {
   const [openVictoryModal, setOpenVictoryModal] = useState(false);
 
   useEffect(() => {
-    // on component mount I want you to fetch the image from the server.
-    fetch('http://localhost:3000/api/v1/images/' + id)
+    fetch(API_BASE_URL + '/images/' + id)
       .then((response) => response.json())
       .then((data) => setImageUrl(data.landscape_url));
   }, []);
@@ -36,7 +36,8 @@ const Image = (props) => {
     console.log(position);
     let { width, height } = position;
     fetch(
-      'http://localhost:3000/api/v1/verify?' +
+      API_BASE_URL +
+        '/verify?' +
         new URLSearchParams({
           id,
           width,
@@ -106,20 +107,10 @@ const Image = (props) => {
           id="playground"
         />
       </div>
-      {/* {openNotification && (
-        <Notification
-          text={currentCharacter}
-          dismount={() => setOpenNotification(false)}
-        />
-      )} */}
       <>{activeNotifications}</>
 
       {openVictoryModal && (
-        <VictoryModal
-          imageId={id}
-          // Just to test the value, remove later.
-          timeTaken={score.current}
-        />
+        <VictoryModal imageId={id} timeTaken={score.current} />
       )}
     </>
   );

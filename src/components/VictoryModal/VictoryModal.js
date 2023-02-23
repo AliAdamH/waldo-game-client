@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../../constants';
 import './VictoryModal.css';
 
 const VictoryModal = ({ imageId, timeTaken }) => {
@@ -21,7 +22,7 @@ const VictoryModal = ({ imageId, timeTaken }) => {
   };
 
   const submitToAPI = (data) => {
-    fetch('http://localhost:3000/api/v1/scores', {
+    fetch(API_BASE_URL + 'scores', {
       method: 'post',
       body: data,
     })

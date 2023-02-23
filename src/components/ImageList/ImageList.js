@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import './ImageList.css';
 import { Link } from 'react-router-dom';
-const ImageList = (props) => {
+import { API_BASE_URL } from '../../constants';
+const ImageList = () => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/api/v1/images')
+    fetch(API_BASE_URL + '/images')
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

@@ -3,7 +3,7 @@ import waldoChars from '../../waldo-logo.png';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-const Home = (props) => {
+const Home = () => {
   return (
     <>
       <header className="header">
