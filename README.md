@@ -20,6 +20,11 @@ To enable the photo tagging ability I first had to manually record  the position
 by recording four points (width and height) of the visible portion of the character, creating a box target as illustrated by the images below :
 
 
+![Box Target Example](https://github.com/AliAdamH/waldo-game-client/blob/media/box_target_character.png?raw=true)
+
+![Box Target With Second Character](https://github.com/AliAdamH/waldo-game-client/blob/media/box_with_second_character.png)
+
+
 <br>
 
 This means any clicks within that box are valid.
